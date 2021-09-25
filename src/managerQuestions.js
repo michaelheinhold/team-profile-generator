@@ -4,17 +4,17 @@ const managerQuestions = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'managerName',
+            name: 'name',
             message: 'What is the name of the team Manager?'
         },
         {
             type: 'input',
-            name: 'managerId',
+            name: 'id',
             message: 'What is the Manager\'s employee ID?'
         },
         {
             type: 'input',
-            name:'managerEmail',
+            name:'email',
             message: 'What is the Manager\'s email?'
         },
         {
