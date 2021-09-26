@@ -1,45 +1,46 @@
-const inquirer = require("inquirer");
-const engineerQuestions =require('./engineerQuestions');
-const internQuestions =require('./internQuestions');
-const managerQuestions =require('./managerQuestions');
-const Manager = require('../lib/Manager');
-const Engineer = require('../lib/Engineer');
-const Intern = require('../lib/Intern');
-
-promptMembers = teamData => {
-    console.log(teamData);
-    if(!teamData){
-        const teamData = [];
-        return managerQuestions()
-        .then(data =>{
-            const manager = new Manager(data.name, data.id, data.email, data.officeNumber, data.addMembers);
-            teamData.push(manager);
-        })
-        .then(()=> {
-            return promptMembers(teamData);
-        })
+const employeePrompt = [
+    {
+        type: 'list',
+        name: 'role',
+        message: 'What is your role?',
+        choices: ['Manager', 'Eningeer', 'Intern', 'Finish building my team']
+    },
+    {
+        type: 'input',
+        name: 'name',
+        message: ({role}) => `Creating a new ${role}; What is the ${role}'s name?`,
+        when: ({role}) => role != 'Finish building my team'
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: ({role}) => `What is the ${role}'s employee ID?`,
+        when: ({role}) => role != 'Finish building my team'
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: ({role}) => `What is the ${role}'s email?`,
+        when: ({role}) => role != 'Finish building my team'
+    },
+    {
+        type: 'input',
+        when: ({role}) => role === 'Manager',
+        name: 'officeNum',
+        message: `What is the Manager's office number?`
+    },
+    {
+        type: 'input',
+        when: ({role}) => role === 'Engineer',
+        name: 'github',
+        message: `What is the Engineer's GitHub username?`
+    },
+    {
+        type: 'input',
+        when: ({role}) => role === 'Intern',
+        name: 'school',
+        message: `What is the Intern's school?`
     }
-    if(teamData[teamData.length-1].addMembers === 'Engineer'){
-        return inquirer.prompt(engineerQuestions)
-        .then(data => {
-            const newEngineer = new Engineer(data.name, data.id, data.email, data.github, data.addMembers);
-            teamData.push(newEngineer);
-        })
-        .then(()=>{
-            return promptMembers(teamData);
-        });
-    } else if (teamData[teamData.length-1].addMembers === 'Intern'){
-        return inquirer.prompt(internQuestions)
-        .then(data => {
-            const newIntern = new Intern(data.name, data.id, data.email, data.school, data.addMembers);
-            teamData.push(newIntern);
-        })
-        .then(()=>{
-            return promptMembers(teamData);
-        });
-    } else  if (teamData[teamData.length-1].addMembers === 'Finish building my team'){
-        return teamData;
-    }
-};
+]
 
-module.exports = promptMembers;
+module.exports = employeePrompt;

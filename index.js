@@ -1,15 +1,5 @@
-const html = require('./src/html-layout');
-const promptMembers = require('./src/prompt-members');
-const fs = require('fs');
+const App = require('./lib/App');
 
-promptMembers()
-    .then(data => {
-        return html(data);
-    })
-    .then(pageHTML => {
-        fs.writeFile('./dist/index.html', pageHTML, err =>{
-            if (err) throw err;
+const app = new App();
 
-            console.log('File created successfully!')
-        })
-    })
+app.start();
