@@ -19,7 +19,7 @@
   ## Usage
   run 'npm index' to start the prompts and that it!
   ### Demonstration Video
-  To view a demonstration video click [here](https://watch.screencastify.com/v/0srG7cQozP2gikGtu0J)
+  To view a demonstration video click [here](https://watch.screencastify.com/v/0srG7cQozP2gikGtu0Jw)
 
   ## License
   
