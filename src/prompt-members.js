@@ -3,7 +3,7 @@ const employeePrompt = [
         type: 'list',
         name: 'role',
         message: 'What is your role?',
-        choices: ['Manager', 'Eningeer', 'Intern', 'Finish building my team']
+        choices: ['Manager', 'Engineer', 'Intern', 'Finish building my team']
     },
     {
         type: 'input',
